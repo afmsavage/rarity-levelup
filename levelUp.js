@@ -13,6 +13,7 @@ const nonceManager = new NonceManager(wallet);
 const contract = new ethers.Contract(contractAddress, rarityAbi, provider);
 const writeContract = contract.connect(nonceManager);
 const summonerIds = require("./summoners");
+const utils = require("./utils");
 
 const checkLevel = async (id) => {
   let level = contract.level(id);
@@ -42,17 +43,11 @@ const levelUp = async () => {
         let receipt = response.wait();
         console.log(receipt);
         console.log(`Leveled up summoner: ${id}`);
-        await new Promise((resolve) => {
-          setTimeout(resolve, 3000);
-        });
       } catch (err) {
         console.error(err);
       }
     } else {
       console.log(`Did not need to level summoner: ${id}`);
-      await new Promise((resolve) => {
-        setTimeout(resolve, 3000);
-      });
     }
   });
 };

@@ -33,17 +33,11 @@ const adventure = async () => {
         let receipt = await response.wait();
         console.log(receipt);
         console.log(`We adventured for summoner ${id}!`);
-        await new Promise((resolve) => {
-          setTimeout(resolve, 3000);
-        });
       } catch (err) {
         console.error(`could not send the tx: ${err}`);
       }
     } else {
       console.log(`not yet time to adventure for ${id}`);
-      await new Promise((resolve) => {
-        setTimeout(resolve, 3000);
-      });
     }
   });
 };
