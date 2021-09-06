@@ -1,10 +1,10 @@
 require("dotenv").config();
 const ethers = require("ethers");
-const endpoint = process.env.FTMPROVIDER;
+const endpoint = process.env.FTMPROVIDER; // eslint-disable-line no-undef
 
 const provider = new ethers.providers.JsonRpcProvider(endpoint, 250);
 
-const Wallet = new ethers.Wallet(process.env.PRIVATE_KEY);
+const Wallet = new ethers.Wallet(process.env.PRIVATE_KEY); // eslint-disable-line no-undef
 const wallet = Wallet.connect(provider);
 
 const getGasPrice = async () => {
