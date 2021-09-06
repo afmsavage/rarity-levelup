@@ -4,7 +4,7 @@
   "description": "Quick app for automating rarity summoner adventuring and leveling up",
   "main": "main.js",
   "scripts": {
-    "build": "docker build --tag name:rarity-bot .",
+    "build": "docker build --tag rarity-bot .",
     "lint": "eslint -c .eslintrc.js . *.js"
   },
   "keywords": [
