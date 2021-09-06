@@ -1,14 +1,18 @@
 {
   "name": "rarity-levelup",
-  "version": "1.0.0",
-  "description": "",
+  "version": "0.0.1",
+  "description": "Quick app for automating rarity summoner adventuring and leveling up",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "docker build --tag name:rarity-bot ."
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+      "ethereum",
+      "rarity",
+      "nft"
+],
+  "author": "Antonio Savage",
+  "license": "MIT",
   "dependencies": {
     "@ethersproject/experimental": "^5.4.0",
     "dotenv": "^10.0.0",
