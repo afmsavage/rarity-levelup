@@ -41,6 +41,9 @@ const adventure = async () => {
       }
     } else {
       console.log(`not yet time to adventure for ${id}`);
+      await new Promise((resolve) => {
+        setTimeout(resolve, 3000);
+      });
     }
   });
 };

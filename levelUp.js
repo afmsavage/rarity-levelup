@@ -50,6 +50,9 @@ const levelUp = async () => {
       }
     } else {
       console.log(`Did not need to level summoner: ${id}`);
+      await new Promise((resolve) => {
+        setTimeout(resolve, 3000);
+      });
     }
   });
 };
