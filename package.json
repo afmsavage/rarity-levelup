@@ -5,7 +5,8 @@
   "main": "main.js",
   "scripts": {
     "build": "docker build --tag rarity-bot .",
-    "lint": "eslint -c .eslintrc.js . *.js"
+    "lint": "eslint -c .eslintrc.js . *.js",
+    "run": "node main.js"
   },
   "keywords": [
     "ethereum",
