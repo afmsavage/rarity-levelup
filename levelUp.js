@@ -39,8 +39,8 @@ const levelUp = async () => {
     if (summonerXp.gte(neededXp)) {
       try {
         let response = await writeContract.level_up(id);
-        let receipt = response.wait();
-        console.log(receipt.transactionHash);
+        /*let receipt = */ response.wait();
+        //console.log(receipt);
         console.log(`Leveled up summoner: ${id}`);
       } catch (err) {
         console.error(err);
