@@ -1,15 +1,10 @@
 require("dotenv").config();
 const ethers = require("ethers");
-const { NonceManager } = require("@ethersproject/experimental");
-const contracts = require("./contracts");
+const contracts = require("../config/contracts");
 const goldContractAddress = contracts.gold;
-const rarityAbi = require("../abis/rarity.json");
+const rarityAbi = require("../abis/rarity_gold.json");
+const { provider, nonceManager } = require("../config/wallet");
 
-const endpoint = process.env.FTMPROVIDER; // eslint-disable-line no-undef
-const provider = new ethers.providers.JsonRpcProvider(endpoint, 250);
-const Wallet = new ethers.Wallet(process.env.PRIVATE_KEY); // eslint-disable-line no-undef
-const wallet = Wallet.connect(provider);
-const nonceManager = new NonceManager(wallet);
 const contract = new ethers.Contract(goldContractAddress, rarityAbi, provider);
 const writeContract = contract.connect(nonceManager);
 const summonerIds = require("./summoners");
@@ -22,10 +17,10 @@ const claimable = async (id) => {
 const claim = async () => {
   for (let i = 0; i < summonerIds.length; i++) {
     try {
-      let response = await writeContract.claim(summonderIds[i]);
+      let response = await writeContract.claim(summonerIds[i]);
       let receipt = await response.wait();
       console.log(receipt);
-      console.log(`We claimed gold for summoner: ${summonderIds[i]}`);
+      console.log(`We claimed gold for summoner: ${summonerIds[i]}`);
     } catch (err) {
       console.error(err);
     }
