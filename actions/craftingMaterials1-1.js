@@ -26,7 +26,8 @@ const craftAdventure = async () => {
   let currentTime = ethers.BigNumber.from(timestamp.timestamp);
   summonerIds.forEach(async (id) => {
     let adventureTimestamp = await getAdventureLog(id);
-    if (currentTime.gt(adventureTimestamp)) {
+    let rewards = await contract.scout(id);
+    if (currentTime.gt(adventureTimestamp) && rewards.gt(ethers.BigNumber.from(0))) {
       try {
         let response = await writeContract.adventure(id);
         let receipt = await response.wait();
