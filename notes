@@ -1,2 +1,10 @@
+base
 https://ftmscan.com/address/0xce761d788df608bd21bdd59d6f4b54b2e27f25bb#code
 
+abilities
+https://ftmscan.com/address/0xB5F5AF1087A8DA62A23b08C00C6ec9af21F397a1#code
+
+Gold
+https://ftmscan.com/address/0x2069B76Afe6b734Fb65D1d099E7ec64ee9CC76B2#code
+
+There was no impact to the customers, and no funds were lost due to this outage.  Our Nucypher nodes were offline for an extended duration due to the Ethereum fork that occurred on 8/27.  This caused our Nucypher nodes to sit in an errored state, and not be online during this period.  The alert configured for this event was set to Slack only, which means that the alert only sends a message on Slack to the #alerting-warning channel, instead of alerting the on-call engineer through PagerDuty. This caused the alert to be missed by the engineer.

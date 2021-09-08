@@ -3,7 +3,7 @@ const ethers = require("ethers");
 const { NonceManager } = require("@ethersproject/experimental");
 const contracts = require("./contracts");
 const rarityContractAddress = contracts.rarity;
-const rarityAbi = require("./abis/rarity.json");
+const rarityAbi = require("../abis/rarity.json");
 
 const endpoint = process.env.FTMPROVIDER; // eslint-disable-line no-undef
 const provider = new ethers.providers.JsonRpcProvider(endpoint, 250);
