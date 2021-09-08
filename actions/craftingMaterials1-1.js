@@ -3,7 +3,7 @@ const ethers = require("ethers");
 const { NonceManager } = require("@ethersproject/experimental");
 const contracts = require("./contracts");
 const craftingContractAddress = contracts.crafting1_1;
-const rarityAbi = require("../abis/rarity.json");
+const rarityAbi = require("../abis/rarity_crafting_1-1.json");
 
 const endpoint = process.env.FTMPROVIDER; // eslint-disable-line no-undef
 const provider = new ethers.providers.JsonRpcProvider(endpoint, 250);
@@ -31,7 +31,8 @@ const craftAdventure = async () => {
   let currentTime = ethers.BigNumber.from(timestamp.timestamp);
   summonerIds.forEach(async (id) => {
     let adventureTimestamp = await getAdventureLog(id);
-    if (currentTime.gt(adventureTimestamp)) {
+    let rewards = await contract.scout(id);
+    if (currentTime.gt(adventureTimestamp) && rewards.gt(ethers.BigNumber.from(0))) {
       try {
         let response = await writeContract.adventure(id);
         let receipt = await response.wait();
