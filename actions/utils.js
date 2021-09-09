@@ -14,7 +14,7 @@ const getNonce = async () => {
 
 const pause = async () => {
   return new Promise((resolve) => {
-    setTimeout(resolve, 3000);
+    setTimeout(resolve, 2000);
   });
 };
 

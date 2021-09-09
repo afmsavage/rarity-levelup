@@ -12,6 +12,7 @@ const contract = new ethers.Contract(
 );
 const writeContract = contract.connect(nonceManager);
 const summonerIds = require("./summoners");
+const { pause } = require("./utils");
 
 // get the time until next adventure
 const getAdventureLog = async (id) => {
@@ -24,22 +25,27 @@ const getAdventureLog = async (id) => {
 const craftAdventure = async () => {
   let timestamp = await provider.getBlock();
   let currentTime = ethers.BigNumber.from(timestamp.timestamp);
-  summonerIds.forEach(async (id) => {
+  for (let id of summonerIds) {
     let adventureTimestamp = await getAdventureLog(id);
     let rewards = await contract.scout(id);
-    if (currentTime.gt(adventureTimestamp) && rewards.gt(ethers.BigNumber.from(0))) {
+    if (
+      currentTime.gt(adventureTimestamp) &&
+      rewards.gt(ethers.BigNumber.from(0))
+    ) {
       try {
         let response = await writeContract.adventure(id);
         let receipt = await response.wait();
         console.log(receipt);
         console.log(`We craft adventured for summoner ${id}!`);
+        pause();
       } catch (err) {
         console.error(`could not send the tx: ${err}`);
       }
     } else {
       console.log(`not yet time to craft adventure for ${id}`);
+      pause();
     }
-  });
+  }
 };
 
 module.exports = craftAdventure;
