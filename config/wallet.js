@@ -8,7 +8,7 @@ const account = wallet.connect(provider);
 const nonceManager = new NonceManager(account);
 
 module.exports = {
-    wallet: account,
-    provider,
-    nonceManager
+  wallet: account,
+  provider,
+  nonceManager,
 };

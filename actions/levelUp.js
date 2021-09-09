@@ -12,6 +12,7 @@ const contract = new ethers.Contract(
 );
 const writeContract = contract.connect(nonceManager);
 const summonerIds = require("./summoners");
+const { pause } = require("./utils");
 
 const checkLevel = async (id) => {
   let level = contract.level(id);
@@ -30,7 +31,7 @@ const checkLevelXp = async (id) => {
 };
 
 const levelUp = async () => {
-  summonerIds.forEach(async (id) => {
+  for (let id of summonerIds) {
     let summonerXp = await checkXp(id);
     let neededXp = await checkLevelXp(id);
     // console.log(summonerXp);
@@ -41,13 +42,15 @@ const levelUp = async () => {
         /*let receipt = */ response.wait();
         //console.log(receipt);
         console.log(`Leveled up summoner: ${id}`);
+        pause();
       } catch (err) {
         console.error(err);
       }
     } else {
       console.log(`Did not need to level summoner: ${id}`);
+      pause();
     }
-  });
+  }
 };
 
 module.exports = levelUp;

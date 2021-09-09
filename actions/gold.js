@@ -15,12 +15,12 @@ const claimable = async (id) => {
 };
 
 const claim = async () => {
-  for (let i = 0; i < summonerIds.length; i++) {
+  for (let id of summonerIds) {
     try {
-      let response = await writeContract.claim(summonerIds[i]);
+      let response = await writeContract.claim(id);
       let receipt = await response.wait();
       console.log(receipt);
-      console.log(`We claimed gold for summoner: ${summonerIds[i]}`);
+      console.log(`We claimed gold for summoner: ${id}`);
     } catch (err) {
       console.error(err);
     }
