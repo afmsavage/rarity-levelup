@@ -4,6 +4,7 @@ const contracts = require("../config/contracts");
 const craftingContractAddress = contracts.crafting1_1;
 const rarityAbi = require("../abis/rarity_crafting_1-1.json");
 const { provider, nonceManager } = require("../config/wallet");
+const { log, error } = require("./utils");
 
 const contract = new ethers.Contract(
   craftingContractAddress,
@@ -11,7 +12,6 @@ const contract = new ethers.Contract(
   provider
 );
 const writeContract = contract.connect(nonceManager);
-const summonerIds = require("./summoners");
 const { pause } = require("./utils");
 
 // get the time until next adventure
@@ -22,30 +22,25 @@ const getAdventureLog = async (id) => {
 };
 
 // sends your summoner on an adventure!
-const craftAdventure = async () => {
-  let timestamp = await provider.getBlock();
-  let currentTime = ethers.BigNumber.from(timestamp.timestamp);
-  for (let id of summonerIds) {
-    let adventureTimestamp = await getAdventureLog(id);
-    let rewards = await contract.scout(id);
+const craftAdventure = async (summonerId, currentTime) => {
+    let adventureTimestamp = await getAdventureLog(summonerId);
+    let rewards = await contract.scout(summonerId);
     if (
       currentTime.gt(adventureTimestamp) &&
       rewards.gt(ethers.BigNumber.from(0))
     ) {
       try {
-        let response = await writeContract.adventure(id);
-        let receipt = await response.wait();
-        console.log(receipt);
-        console.log(`We craft adventured for summoner ${id}!`);
+        let response = await writeContract.adventure(summonerId);
+        /* let receipt = */ await response.wait();
+        // log("craftAdventure", summonerId, receipt);
+        log("craftAdventure", summonerId, `Adventure successfull!`);
         pause();
       } catch (err) {
-        console.error(`could not send the tx: ${err}`);
+        error("craftAdventure", summonerId, `Could not send the tx: ${err}`);
       }
     } else {
-      console.log(`not yet time to craft adventure for ${id}`);
-      pause();
+      log("craftAdventure", summonerId, `Not yet time to adventure.`);
     }
-  }
 };
 
 module.exports = craftAdventure;
