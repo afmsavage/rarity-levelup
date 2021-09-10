@@ -18,8 +18,18 @@ const pause = async () => {
   });
 };
 
+const log = (methodName, summonerId, msg) => {
+  console.log(`${methodName}[${summonerId}]: ${msg}`);
+};
+
+const error = (methodName, summonerId, msg) => {
+  console.error(`${methodName}[${summonerId}]: ${msg}`);
+};
+
 module.exports = {
-  getGasPrice: getGasPrice,
-  getNonce: getNonce,
-  pause: pause,
+  getGasPrice,
+  getNonce,
+  pause,
+  log,
+  error
 };

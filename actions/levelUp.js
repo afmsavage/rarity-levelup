@@ -4,6 +4,7 @@ const contracts = require("../config/contracts");
 const rarityContractAddress = contracts.rarity;
 const rarityAbi = require("../abis/rarity.json");
 const { provider, nonceManager } = require("../config/wallet");
+const { log, error } = require("./utils");
 
 const contract = new ethers.Contract(
   rarityContractAddress,
@@ -11,7 +12,6 @@ const contract = new ethers.Contract(
   provider
 );
 const writeContract = contract.connect(nonceManager);
-const summonerIds = require("./summoners");
 const { pause } = require("./utils");
 
 const checkLevel = async (id) => {
@@ -30,27 +30,22 @@ const checkLevelXp = async (id) => {
   return xpRequired;
 };
 
-const levelUp = async () => {
-  for (let id of summonerIds) {
-    let summonerXp = await checkXp(id);
-    let neededXp = await checkLevelXp(id);
-    // console.log(summonerXp);
-    // console.log(neededXp);
+const levelUp = async (summonerId) => {
+    let summonerXp = await checkXp(summonerId);
+    let neededXp = await checkLevelXp(summonerId);
     if (summonerXp.gte(neededXp)) {
       try {
-        let response = await writeContract.level_up(id);
-        /*let receipt = */ response.wait();
-        //console.log(receipt);
-        console.log(`Leveled up summoner: ${id}`);
+        let response = await writeContract.level_up(summonerId);
+        /* let receipt = */ await response.wait();
+        // log("levelUp", summonerId, receipt);
+        log("levelUp", summonerId, `Level up succesfull!`);
         pause();
       } catch (err) {
-        console.error(err);
+        error("levelUp", summonerId, err);
       }
     } else {
-      console.log(`Did not need to level summoner: ${id}`);
-      pause();
+      log("levelUp", summonerId, `Did not need to level up.`);
     }
-  }
 };
 
 module.exports = levelUp;
