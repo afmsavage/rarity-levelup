@@ -1,8 +1,4 @@
 // add additional summoner IDs here to adventure for
-const summonerIds = [
-  163446, 163414, 163388, 163360, 163321, 163286, 163247, 163201, 163168,
-  163150, 143820, 143965, 328328, 328163, 327900, 327745, 327485, 327260,
-  327043, 326780, 326373, 325995, 325377,
-];
+const summonerIds = [1170749, 1171044]
 
-module.exports = summonerIds;
+module.exports = summonerIds
