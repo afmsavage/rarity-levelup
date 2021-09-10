@@ -11,6 +11,9 @@ const contract = new ethers.Contract(
   provider
 );
 
+const { pause } = require("./utils");
+
+/* WIP */
 const writeContract = contract.connect(nonceManager);
 
 const mint = async (type) => {
@@ -22,8 +25,21 @@ const mint = async (type) => {
   let receipt = await response.wait();
   let id = receipt.events[1].args.summoner.toNumber();
   console.log(id);
+  pause();
 };
 
-mint(1).catch((err) => {
-  console.error(err);
+const main = async () => {
+  for (let b = 0; b < 5; b++) {
+    for (let i = 1; i < 12; i++) {
+      await mint(i);
+    }
+  }
+};
+
+main().catch((err) => {
+  console.error("there was an error");
 });
+
+// mint(1).catch((err) => {
+//   console.error(err);
+// });

@@ -23,20 +23,20 @@ const getAdventureLog = async (id) => {
 
 // sends your summoner on an adventure!
 const adventure = async (summonerId, currentTime) => {
-    let adventureTimestamp = await getAdventureLog(summonerId);
-    if (currentTime.gt(adventureTimestamp)) {
-      try {
-        let response = await writeContract.adventure(summonerId);
-        /* let receipt = */ await response.wait();
-        // log("adventure", summonerId, receipt);
-        log("adventure", summonerId, `Adventure successfull!`);
-        pause();
-      } catch (err) {
-        error("adventure", summonerId, `Could not send the tx: ${err}`);
-      }
-    } else {
-      log("adventure", summonerId, `Not yet time to adventure.`);
+  let adventureTimestamp = await getAdventureLog(summonerId);
+  if (currentTime.gt(adventureTimestamp)) {
+    try {
+      let response = await writeContract.adventure(summonerId);
+      /* let receipt = */ await response.wait();
+      // log("adventure", summonerId, receipt);
+      log("adventure", summonerId, `Adventure successfull!`);
+      pause();
+    } catch (err) {
+      error("adventure", summonerId, `Could not send the tx: ${err}`);
     }
+  } else {
+    log("adventure", summonerId, `Not yet time to adventure.`);
+  }
 };
 
 module.exports = adventure;

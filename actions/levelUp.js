@@ -31,24 +31,24 @@ const checkLevelXp = async (id) => {
 };
 
 const levelUp = async (summonerId) => {
-    let summonerXp = await checkXp(summonerId);
-    let neededXp = await checkLevelXp(summonerId);
-    if (summonerXp.gte(neededXp)) {
-      try {
-        let response = await writeContract.level_up(summonerId);
-        /* let receipt = */ await response.wait();
-        // log("levelUp", summonerId, receipt);
-        log("levelUp", summonerId, `Level up succesfull!`);
-        pause();
-      } catch (err) {
-        error("levelUp", summonerId, err);
-      }
-    } else {
-      log("levelUp", summonerId, `Did not need to level up.`);
+  let summonerXp = await checkXp(summonerId);
+  let neededXp = await checkLevelXp(summonerId);
+  if (summonerXp.gte(neededXp)) {
+    try {
+      let response = await writeContract.level_up(summonerId);
+      /* let receipt = */ await response.wait();
+      // log("levelUp", summonerId, receipt);
+      log("levelUp", summonerId, `Level up succesfull!`);
+      pause();
+    } catch (err) {
+      error("levelUp", summonerId, err);
     }
+  } else {
+    log("levelUp", summonerId, `Did not need to level up.`);
+  }
 };
 
-module.exports = levelUp;
+module.exports = { levelUp, checkLevel };
 
 // levelUp().catch((err) => {
 //   console.error(err);
