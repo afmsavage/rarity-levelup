@@ -1,26 +1,30 @@
 {
-  "name": "rarity-levelup",
-  "version": "0.0.1",
-  "description": "Quick app for automating rarity summoner adventuring and leveling up",
-  "main": "main.js",
-  "scripts": {
-    "build": "docker build --tag rarity-bot .",
-    "lint": "eslint -c .eslintrc.js . *.js",
-    "run": "node main.js"
-  },
-  "keywords": [
-    "ethereum",
-    "rarity",
-    "nft"
-  ],
-  "author": "Antonio Savage",
-  "license": "MIT",
-  "dependencies": {
-    "@ethersproject/experimental": "^5.4.0",
-    "dotenv": "^10.0.0",
-    "ethers": "^5.4.6"
-  },
-  "devDependencies": {
-    "eslint": "^7.32.0"
-  }
+    "name": "rarity-levelup",
+    "version": "0.0.1",
+    "description": "Quick app for automating rarity summoner adventuring and leveling up",
+    "main": "main.js",
+    "scripts": {
+        "build": "docker build --tag rarity-bot .",
+        "lint": "eslint -c .eslintrc.js . *.js",
+        "run": "node main.js",
+        "prettier": "prettier --write .",
+        "mint": "node actions/mint.js"
+    },
+    "keywords": [
+        "ethereum",
+        "rarity",
+        "nft"
+    ],
+    "author": "Antonio Savage",
+    "license": "MIT",
+    "dependencies": {
+        "@ethersproject/experimental": "^5.4.0",
+        "dotenv": "^10.0.0",
+        "ethers": "^5.4.6"
+    },
+    "devDependencies": {
+        "eslint": "^7.32.0",
+        "eslint-config-prettier": "^8.3.0",
+        "prettier": "^2.4.0"
+    }
 }

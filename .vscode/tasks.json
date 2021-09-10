@@ -1,6 +1,6 @@
 {
-	"version": "2.0.0",
-	"tasks": [
+    "version": "2.0.0",
+    "tasks": [
         {
             "type": "docker-build",
             "label": "docker-build",
@@ -14,17 +14,13 @@
         {
             "type": "docker-run",
             "label": "docker-run: release",
-            "dependsOn": [
-                "docker-build"
-            ],
+            "dependsOn": ["docker-build"],
             "platform": "node"
         },
         {
             "type": "docker-run",
             "label": "docker-run: debug",
-            "dependsOn": [
-                "docker-build"
-            ],
+            "dependsOn": ["docker-build"],
             "dockerRun": {
                 "env": {
                     "DEBUG": "*",

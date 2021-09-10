@@ -1,33 +1,29 @@
-require("dotenv").config();
-const ethers = require("ethers");
-const contracts = require("../config/contracts");
-const rarityContractAddress = contracts.rarity;
-const rarityAbi = require("../abis/rarity.json");
-const { provider } = require("../config/wallet");
-const contract = new ethers.Contract(
-    rarityContractAddress,
-    rarityAbi,
-    provider
-);
+require('dotenv').config()
+const ethers = require('ethers')
+const contracts = require('../config/contracts')
+const rarityContractAddress = contracts.rarity
+const rarityAbi = require('../abis/rarity.json')
+const { provider } = require('../config/wallet')
+const contract = new ethers.Contract(rarityContractAddress, rarityAbi, provider)
 
 const checkClass = async (summonerId) => {
-    let summonerClass = await contract.class(summonerId);
-    return classes[summonerClass.toString()];
-};
+    let summonerClass = await contract.class(summonerId)
+    return classes[summonerClass.toString()]
+}
 
 const classes = {
-    1: "Barbarian",
-    2: "Bard",
-    3: "Cleric",
-    4: "Druid",
-    5: "Fighter",
-    6: "Monk",
-    7: "Paladin",
-    8: "Ranger",
-    9: "Rogue",
-    10: "Sorcerer",
-    11: "Wizard",
-};
+    1: 'Barbarian',
+    2: 'Bard',
+    3: 'Cleric',
+    4: 'Druid',
+    5: 'Fighter',
+    6: 'Monk',
+    7: 'Paladin',
+    8: 'Ranger',
+    9: 'Rogue',
+    10: 'Sorcerer',
+    11: 'Wizard',
+}
 
 const baseAttributes = {
     Barbarian: {
@@ -118,10 +114,10 @@ const baseAttributes = {
         wisdom: 13,
         charisma: 8,
     },
-};
+}
 
 module.exports = {
     checkClass,
     classes,
     baseAttributes,
-};
+}
