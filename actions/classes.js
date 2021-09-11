@@ -70,7 +70,7 @@ const baseAttributes = {
         strength: 8,
         dexterity: 18,
         constitution: 15,
-        intelligence: 7,
+        intelligence: 8,
         wisdom: 15,
         charisma: 8,
     },
