@@ -9,8 +9,10 @@ const { log, error, pause} = require('./utils')
 const contract = new ethers.Contract(goldContractAddress, rarityAbi, provider)
 const writeContract = contract.connect(nonceManager)
 
-const claimable = async (id) => {
-    let amount = contract.claimable(id)
+const claimable = async (summonerId) => {
+    let amount = contract.claimable(summonerId).catch(() => {
+        return
+    });
     return amount
 }
 

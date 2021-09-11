@@ -14,11 +14,14 @@ const { pause } = require('./utils')
 const { checkLevel } = require('./levelUp')
 const { checkClass, baseAttributes } = require('./classes')
 
+// only used to place the initial skill points on a new summoner
+// skill points set in classes.js
 const spendBaseAttributes = async (summonerId) => {
     let summonerClass = await checkClass(summonerId)
     let level = await checkLevel(summonerId)
     let abilityPoints = baseAttributes[summonerClass]
-    if (level.eq(1)) {
+    let characterCreated = await contract.character_created(summonerId)
+    if (level.eq(1) && !characterCreated) {
         try {
             let response = await writeContract.point_buy(
                 summonerId,
@@ -37,7 +40,7 @@ const spendBaseAttributes = async (summonerId) => {
             error('point_buy', summonerId, `Could not send the tx: ${err}`)
         }
     } else {
-        log('point_buy', summonerId, `Not level 1, no need to buy points`)
+        log('point_buy', summonerId, `Not level 1 or already spent base points, no need to set initial skill points`)
     }
 }
 
