@@ -10,7 +10,7 @@ module.exports = {
     },
     globals: {
         console: 'readonly',
-        setTimeout: 'readonly'
+        setTimeout: 'readonly',
     },
     rules: {
         indent: ['warn', 4],
