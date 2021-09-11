@@ -6,7 +6,7 @@ const ethers = require('ethers')
 const { provider } = require('./config/wallet')
 const { checkClass } = require('./actions/classes')
 const { spendBaseAttributes } = require('./actions/spendBaseAttributes')
-const { claim } = require('./actions/gold')
+const { claimGold } = require('./actions/gold')
 
 const main = async () => {
     let block = await provider.getBlock()
@@ -21,7 +21,7 @@ const main = async () => {
         await levelUp(summonerIds[i])
         await craftAdventure(summonerIds[i], currentTime)
         await spendBaseAttributes(summonerIds[i])
-        await claim(summonerIds[i])
+        // await claimGold(summonerIds[i])
         console.log(``)
     }
 }

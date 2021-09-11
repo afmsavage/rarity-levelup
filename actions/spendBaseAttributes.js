@@ -40,11 +40,15 @@ const spendBaseAttributes = async (summonerId) => {
             error('point_buy', summonerId, `Could not send the tx: ${err}`)
         }
     } else {
-        log('point_buy', summonerId, `Not level 1 or already spent base points, no need to set initial skill points`)
+        log(
+            'point_buy',
+            summonerId,
+            `Not level 1 or already spent base points, no need to set initial skill points`
+        )
     }
 }
 
-module.exports = { checkClass, spendBaseAttributes };
+module.exports = { checkClass, spendBaseAttributes }
 
 // spendBaseAttributes(1170749).catch((err) => {
 //   console.error(err);

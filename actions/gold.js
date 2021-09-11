@@ -4,7 +4,7 @@ const contracts = require('../config/contracts')
 const goldContractAddress = contracts.gold
 const rarityAbi = require('../abis/rarity_gold.json')
 const { provider, nonceManager } = require('../config/wallet')
-const { log, error, pause} = require('./utils')
+const { log, error, pause } = require('./utils')
 
 const contract = new ethers.Contract(goldContractAddress, rarityAbi, provider)
 const writeContract = contract.connect(nonceManager)
@@ -12,13 +12,13 @@ const writeContract = contract.connect(nonceManager)
 const claimable = async (summonerId) => {
     let amount = contract.claimable(summonerId).catch(() => {
         return
-    });
+    })
     return amount
 }
 
 const { checkLevel } = require('./levelUp')
 
-const claim = async (summonerId) => {
+const claimGold = async (summonerId) => {
     let level = await checkLevel(summonerId)
     let amount = await claimable(summonerId)
     if (level.gt(1) && amount.isBigNumber() && amount.gt(0)) {
@@ -37,7 +37,7 @@ const claim = async (summonerId) => {
 }
 
 module.exports = {
-    claim,
+    claimGold,
 }
 
 // claim(163414).catch((err) => {
