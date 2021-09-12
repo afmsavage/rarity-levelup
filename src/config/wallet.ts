@@ -7,8 +7,4 @@ const wallet = new ethers.Wallet(process.env.PRIVATE_KEY) // eslint-disable-line
 const account = wallet.connect(provider)
 const nonceManager = new NonceManager(account)
 
-module.exports = {
-    wallet: account,
-    provider,
-    nonceManager,
-}
+

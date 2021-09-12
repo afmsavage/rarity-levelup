@@ -2,7 +2,7 @@ require('dotenv').config()
 const ethers = require('ethers')
 const contracts = require('../config/contracts')
 const rarityContractAddress = contracts.attributes
-const rarityAbi = require('../abis/rarity_attributes.json')
+const rarityAbi = require('../../abis/rarity_attributes.json')
 const { provider, nonceManager } = require('../config/wallet')
 const { log, error } = require('./utils')
 
@@ -48,7 +48,10 @@ const spendBaseAttributes = async (summonerId) => {
     }
 }
 
-module.exports = { checkClass, spendBaseAttributes }
+module.exports = {
+    checkClass,
+    spendBaseAttributes
+}
 
 // spendBaseAttributes(1170749).catch((err) => {
 //   console.error(err);

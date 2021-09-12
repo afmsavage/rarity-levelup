@@ -2,7 +2,7 @@ require('dotenv').config()
 const ethers = require('ethers')
 const contracts = require('../config/contracts')
 const craftingContractAddress = contracts.crafting1_1
-const rarityAbi = require('../abis/rarity_crafting_1-1.json')
+const rarityAbi = require('../../abis/rarity_crafting_1-1.json')
 const { provider, nonceManager } = require('../config/wallet')
 const { log, error } = require('./utils')
 

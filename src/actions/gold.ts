@@ -2,7 +2,7 @@ require('dotenv').config()
 const ethers = require('ethers')
 const contracts = require('../config/contracts')
 const goldContractAddress = contracts.gold
-const rarityAbi = require('../abis/rarity_gold.json')
+const rarityAbi = require('../../abis/rarity_gold.json')
 const { provider, nonceManager } = require('../config/wallet')
 const { log, error, pause } = require('./utils')
 
