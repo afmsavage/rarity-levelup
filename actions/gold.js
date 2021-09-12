@@ -36,9 +36,8 @@ const claimGold = async (summonerId) => {
     }
 }
 
-module.exports = {
-    claimGold,
-}
+module.exports = claimGold
+
 
 // claim(163414).catch((err) => {
 //     console.error(err)

@@ -43,7 +43,7 @@ const craftAdventure = async (summonerId, currentTime) => {
     }
 }
 
-module.exports = { craftAdventure }
+module.exports = craftAdventure
 
 // adventure().catch((err) => {
 //   console.error(err);
