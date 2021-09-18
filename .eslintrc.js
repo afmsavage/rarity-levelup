@@ -14,5 +14,6 @@ module.exports = {
     },
     rules: {
         indent: ['warn', 4],
+        // 'function-paren-newline': ['warn', { minItems: 3 }],
     },
 }

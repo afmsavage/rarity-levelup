@@ -2,9 +2,13 @@ require('dotenv').config()
 const ethers = require('ethers')
 const contracts = require('../config/contracts')
 const rarityContractAddress = contracts.rarity
-const rarityAbi = require('../abis/rarity.json')
+const classesAbi = require('../abis/rarity.json')
 const { provider } = require('../config/wallet')
-const contract = new ethers.Contract(rarityContractAddress, rarityAbi, provider)
+const contract = new ethers.Contract(
+    rarityContractAddress,
+    classesAbi,
+    provider
+)
 
 const checkClass = async (summonerId) => {
     let summonerClass = await contract.class(summonerId)
