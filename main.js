@@ -7,6 +7,7 @@ const { provider } = require('./config/wallet')
 const { checkClass } = require('./actions/classes')
 const { spendBaseAttributes } = require('./actions/spendBaseAttributes')
 const claimGold = require('./actions/gold')
+const claimRar = require('./actions/rarClaim')
 
 const main = async () => {
     let block = await provider.getBlock()
@@ -22,6 +23,7 @@ const main = async () => {
         await craftAdventure(summonerIds[i], currentTime)
         await spendBaseAttributes(summonerIds[i])
         await claimGold(summonerIds[i])
+        await claimRar(summonerIds[i])
         console.log(``)
     }
 }
