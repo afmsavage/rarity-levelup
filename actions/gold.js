@@ -2,11 +2,11 @@ require('dotenv').config()
 const ethers = require('ethers')
 const contracts = require('../config/contracts')
 const goldContractAddress = contracts.gold
-const rarityAbi = require('../abis/rarity_gold.json')
+const goldAbi = require('../abis/rarity_gold.json')
 const { provider, nonceManager } = require('../config/wallet')
 const { log, error, pause } = require('./utils')
 
-const contract = new ethers.Contract(goldContractAddress, rarityAbi, provider)
+const contract = new ethers.Contract(goldContractAddress, goldAbi, provider)
 const writeContract = contract.connect(nonceManager)
 
 const claimable = async (summonerId) => {
@@ -21,8 +21,12 @@ const { checkLevel } = require('./levelUp')
 const claimGold = async (summonerId) => {
     let level = await checkLevel(summonerId)
     let amount = await claimable(summonerId)
-    if (amount === undefined ) {
-        log('gold', summonerId, `No gold to claim or already claimed for level ${level}`)
+    if (amount === undefined) {
+        log(
+            'gold',
+            summonerId,
+            `No gold to claim or already claimed for level ${level}`
+        )
     } else if (level.gt(1) && amount.gt(0)) {
         try {
             let response = await writeContract.claim(summonerId)
@@ -39,7 +43,6 @@ const claimGold = async (summonerId) => {
 }
 
 module.exports = claimGold
-
 
 // claim(163414).catch((err) => {
 //     console.error(err)

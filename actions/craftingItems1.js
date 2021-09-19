@@ -1,17 +1,17 @@
-// adventure to obtain materials to use in crafting
-// https://andrecronje.medium.com/rarity-the-cellar-83a1606a0be3
+// https://andrecronje.medium.com/rarity-crafting-abbc5f10e95a
+// attempt to craft items
 
 require('dotenv').config()
 const ethers = require('ethers')
 const contracts = require('../config/contracts')
-const craftingMaterialsContractAddress = contracts.craftingAdventure1_1
-const craftingMaterials1_1Abi = require('../abis/rarity_crafting_1-1.json')
+const craftingItems1ContractAddress = contracts.craftingItems1
+const craftingItems1Abi = require('../abis/rarity_item_crafting_1.json')
 const { provider, nonceManager } = require('../config/wallet')
 const { log, error } = require('./utils')
 
 const contract = new ethers.Contract(
-    craftingMaterialsContractAddress,
-    craftingMaterials1_1Abi,
+    craftingItems1ContractAddress,
+    craftingItems1Abi,
     provider
 )
 const writeContract = contract.connect(nonceManager)

@@ -2,11 +2,15 @@ require('dotenv').config()
 const ethers = require('ethers')
 const contracts = require('../config/contracts')
 const rarityContractAddress = contracts.rarity
-const rarityAbi = require('../abis/rarity.json')
+const adventureAbi = require('../abis/rarity.json')
 const { provider, nonceManager } = require('../config/wallet')
 const { log, error } = require('./utils')
 
-const contract = new ethers.Contract(rarityContractAddress, rarityAbi, provider)
+const contract = new ethers.Contract(
+    rarityContractAddress,
+    adventureAbi,
+    provider
+)
 const writeContract = contract.connect(nonceManager)
 const { pause } = require('./utils')
 
